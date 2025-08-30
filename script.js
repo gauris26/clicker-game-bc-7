@@ -8,12 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const setGameTimeout = document.querySelector("#setGameTimeout");
   const startGame = document.querySelector("#startGame");
 
-  //interval
-  //timeout
-
   let refreshIntervalId = null;
-  let score = 0;
   let timeLeft = 30;
+  let score = 0;
 
   function setGameValueTimeout() {
     let timeout = timeoutInput.value;
@@ -22,13 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
       timeLeftDisplay.textContent = timeout;
     }
   }
+
   setGameTimeout.addEventListener("click", setGameValueTimeout);
 
   startGame.addEventListener("click", function () {
-    timeoutInput.disabled = true;
-    setGameTimeout.disabled = true;
-    startGame.disabled = true;
     mensajeDisplay.textContent = "";
+    setGameTimeout.disabled = true;
+    timeoutInput.disabled = true;
+    startGame.disabled = true;
+    moveTarget();
+
     refreshIntervalId = setInterval(() => {
       updateTimer(
         (count) => {

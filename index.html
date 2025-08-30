@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clicker Game</title>
     <style>
-        body {
-            background-color: black;
-            color: white;
-        }
+      body {
+        background-color: black;
+        color: white;
+      }
+
       #gameArea {
         width: 300px;
         height: 300px;
@@ -30,6 +31,7 @@
     <h1>Haz clic en el cuadrado rojo</h1>
     <input type="number" id="timeout" min="1" max="100" value="30" />
     <button id="setGameTimeout">Fijar temporizador</button>
+
     <hr />
     <div id="gameArea">
       <div id="clickTarget"></div>
@@ -37,6 +39,8 @@
     <p>Puntuación: <span id="score">0</span></p>
     <p id="timer">Tiempo restante: <span id="timeLeft">30</span></p>
     <button id="startGame">Iniciar temporizador</button>
+    <hr />
+
     <p id="mensaje"></p>
     <script src="script.js"></script>
   </body>
