@@ -74,12 +74,17 @@ document.addEventListener("DOMContentLoaded", function () {
         cadaSegundoCallback(0);
         seAcaboElTiempo();
       }
-      timeoutInput.disabled = false;
+
       setGameTimeout.disabled = false;
+      timeoutInput.disabled = false;
       startGame.disabled = false;
+
       let mensaje = `Tiempo agotado! Tu puntuación final es: ${score}`;
-      mensajeDisplay.textContent = mensaje;
       alert(mensaje);
+      score = 0;
+
+      mensajeDisplay.textContent = mensaje;
+      scoreDisplay.textContent = score;
     }
   }
 
