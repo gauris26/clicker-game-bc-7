@@ -1,34 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const gameArea = document.querySelector("#gameArea");
-  const clickTarget = document.querySelector("#clickTarget");
-  const scoreDisplay = document.querySelector("#score");
+  const setGameTimeout = document.querySelector("#setGameTimeout");
   const timeLeftDisplay = document.querySelector("#timeLeft");
+  const clickTarget = document.querySelector("#clickTarget");
+  const themeButton = document.querySelector("#changeTheme");
   const mensajeDisplay = document.querySelector("#mensaje");
   const timeoutInput = document.querySelector("#timeout");
-  const setGameTimeout = document.querySelector("#setGameTimeout");
   const startGame = document.querySelector("#startGame");
-
-  //interval
-  //timeout
+  const scoreDisplay = document.querySelector("#score");
+  const gameArea = document.querySelector("#gameArea");
 
   let refreshIntervalId = null;
-  let score = 0;
   let timeLeft = 30;
+  let score = 0;
 
-  function setGameValueTimeout() {
-    let timeout = timeoutInput.value;
-    if (timeout) {
-      timeLeft = parseInt(timeout);
-      timeLeftDisplay.textContent = timeout;
-    }
-  }
   setGameTimeout.addEventListener("click", setGameValueTimeout);
 
+  themeButton.addEventListener("click", function () {
+    const body = document.querySelector("body");
+
+    if (body.style.color == "white") {
+      body.style.color = "black";
+      body.style.backgroundColor = "white";
+    } else {
+      body.style.color = "white";
+      body.style.backgroundColor = "black";
+    }
+  });
+
   startGame.addEventListener("click", function () {
-    timeoutInput.disabled = true;
-    setGameTimeout.disabled = true;
-    startGame.disabled = true;
     mensajeDisplay.textContent = "";
+    setGameTimeout.disabled = true;
+    timeoutInput.disabled = true;
+    startGame.disabled = true;
+    moveTarget();
+
     refreshIntervalId = setInterval(() => {
       updateTimer(
         (count) => {
@@ -50,6 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
       moveTarget();
     }
   });
+
+  function setGameValueTimeout() {
+    let timeout = timeoutInput.value;
+    if (timeout) {
+      timeLeft = parseInt(timeout);
+      timeLeftDisplay.textContent = timeout;
+    }
+  }
 
   function updateTimer(cadaSegundoCallback, seAcaboElTiempo) {
     if (timeLeft > 0) {
