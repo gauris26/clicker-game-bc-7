@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const dificultySelect = document.querySelector("#dificultySelect");
   const setGameTimeout = document.querySelector("#setGameTimeout");
   const timeLeftDisplay = document.querySelector("#timeLeft");
   const clickTarget = document.querySelector("#clickTarget");
@@ -56,6 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  clickTarget.addEventListener("mouseover", function () {
+    if (refreshIntervalId != null && dificultySelect.value == "imposible") {
+      let prob = Math.random();
+      if (prob > 0.1) {
+        moveTarget();
+      }
+    }
+  });
+
   function setGameValueTimeout() {
     let timeout = timeoutInput.value;
     if (timeout) {
@@ -67,6 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateTimer(cadaSegundoCallback, seAcaboElTiempo) {
     if (timeLeft > 0) {
       cadaSegundoCallback(--timeLeft);
+      if (dificultySelect.value != "normal") {
+        moveTarget();
+      }
     } else {
       //Temporizador llego a cero
       if (refreshIntervalId != null) {
@@ -74,12 +87,17 @@ document.addEventListener("DOMContentLoaded", function () {
         cadaSegundoCallback(0);
         seAcaboElTiempo();
       }
-      timeoutInput.disabled = false;
+
       setGameTimeout.disabled = false;
+      timeoutInput.disabled = false;
       startGame.disabled = false;
+
       let mensaje = `Tiempo agotado! Tu puntuación final es: ${score}`;
-      mensajeDisplay.textContent = mensaje;
       alert(mensaje);
+      score = 0;
+
+      mensajeDisplay.textContent = mensaje;
+      scoreDisplay.textContent = score;
     }
   }
 
