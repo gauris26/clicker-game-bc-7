@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let timeLeft = 30;
   let score = 0;
 
+
+  let highScore = localStorage.getItem('highScore') || 0;
+  const highScoreDisplay = document.querySelector("#highScore"); // nuevo elemento en HTML
+  highScoreDisplay.textContent = highScore;
+
   setGameTimeout.addEventListener("click", setGameValueTimeout);
 
   themeButton.addEventListener("click", function () {
@@ -80,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let mensaje = `Tiempo agotado! Tu puntuación final es: ${score}`;
       mensajeDisplay.textContent = mensaje;
       alert(mensaje);
+
+      updateHighScore();
     }
   }
 
@@ -93,4 +100,13 @@ document.addEventListener("DOMContentLoaded", function () {
     clickTarget.style.left = `${randomX}px`;
     clickTarget.style.top = `${randomY}px`;
   }
-});
+  function updateHighScore() {
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem('highScore', highScore);
+      highScoreDisplay.textContent = highScore;
+    }
+
+  }
+
+  });
