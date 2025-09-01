@@ -1,48 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clicker Game</title>
-    <style>
-      body {
-        background-color: black;
-        color: white;
-      }
 
-      #gameArea {
-        width: 300px;
-        height: 300px;
-        border: 2px solid #333;
-        position: relative;
-        overflow: hidden;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clicker Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #121212;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
 
-      #clickTarget {
-        width: 50px;
-        height: 50px;
-        background-color: red;
-        position: absolute;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Haz clic en el cuadrado rojo</h1>
-    <input type="number" id="timeout" min="1" max="100" value="30" />
-    <button id="setGameTimeout">Fijar temporizador</button>
-    <button id="changeTheme">Cambiar tema</button>
+    h1 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
 
-    <hr />
-    <div id="gameArea">
-      <div id="clickTarget"></div>
-    </div>
+    .controls {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #ff4747;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      font-size: 1rem;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff1a1a;
+    }
+
+    #gameArea {
+      width: 320px;
+      height: 320px;
+      margin: 20px auto;
+      border: 3px solid #444;
+      background: #1e1e1e;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+
+    #clickTarget {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    #clickTarget:hover {
+      transform: scale(1.1);
+    }
+
+    .scoreboard {
+      margin: 15px 0;
+      font-size: 1.2rem;
+    }
+
+    #mensaje {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Haz clic en el cuadrado rojo</h1>
+
+  <div class="controls">
+    <input type="number" id="timeout" min="5" max="120" value="30" />
+    <button id="setGameTimeout">⏱️ Fijar tiempo</button>
+    <button id="changeTheme">🌙 Cambiar tema</button>
+  </div>
+
+  <hr />
+
+  <div id="gameArea">
+    <div id="clickTarget"></div>
+  </div>
+
+  <div class="scoreboard">
     <p>Puntuación: <span id="score">0</span></p>
-    <p id="timer">Tiempo restante: <span id="timeLeft">30</span></p>
-    <button id="startGame">Iniciar temporizador</button>
-    <hr />
+    <p>Tiempo restante: <span id="timeLeft">30</span></p>
+    <p>🏆 Récord: <span id="highScore">0</span></p>
+  </div>
 
-    <p id="mensaje"></p>
-    <script src="script.js"></script>
-  </body>
+  <button id="startGame">▶️ Iniciar juego</button>
+
+  <hr />
+  <p id="mensaje"></p>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
