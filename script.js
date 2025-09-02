@@ -11,30 +11,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const gameArea = document.querySelector("#gameArea");
 
   let refreshIntervalId = null;
-  let timeLeft = 30;
   let score = 0;
+  let timeLeft = 30;
 
+  function setGameValueTimeout() {
+    let timeout = timeoutInput.value;
+    if (timeout) {
+      timeLeft = parseInt(timeout);
+      timeLeftDisplay.textContent = timeout;
+    }
+  }
   setGameTimeout.addEventListener("click", setGameValueTimeout);
 
-  themeButton.addEventListener("click", function () {
-    const body = document.querySelector("body");
-
-    if (body.style.color == "white") {
-      body.style.color = "black";
-      body.style.backgroundColor = "white";
-    } else {
-      body.style.color = "white";
-      body.style.backgroundColor = "black";
-    }
-  });
-
   startGame.addEventListener("click", function () {
-    mensajeDisplay.textContent = "";
-    setGameTimeout.disabled = true;
     timeoutInput.disabled = true;
+    setGameTimeout.disabled = true;
     startGame.disabled = true;
-    moveTarget();
+    mensajeDisplay.textContent = "";
 
+    // Temporizador principal
     refreshIntervalId = setInterval(() => {
       updateTimer(
         (count) => {
@@ -43,10 +38,16 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         () => {
           refreshIntervalId = null;
+          clearInterval(autoMoveIntervalId); // detener movimiento automático
           setGameValueTimeout();
         }
       );
     }, 1000);
+
+    // Movimiento automático del círculo
+    autoMoveIntervalId = setInterval(() => {
+      moveTarget();
+    }, 1000); // cada 1 segundos
   });
 
   clickTarget.addEventListener("click", function () {
@@ -54,6 +55,9 @@ document.addEventListener("DOMContentLoaded", function () {
       score++;
       scoreDisplay.textContent = score;
       moveTarget();
+      // Cambio de color aleatorio
+      const randomColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      clickTarget.style.backgroundColor = randomColor;
     }
   });
 
