@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clicker Game</title>
     <style>
-      body {
-        background-color: black;
-        color: white;
-      }
+        body {
+            background-color: black;
+            color: white;
+        }
 
-      #gameArea {
-        width: 300px;
-        height: 300px;
-        border: 2px solid #333;
-        position: relative;
-        overflow: hidden;
-      }
+        #gameArea {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
 
-      #clickTarget {
-        width: 50px;
-        height: 50px;
-        background-color: red;
-        position: absolute;
-        cursor: pointer;
-      }
+        #clickTarget {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+        }
     </style>
-  </head>
-  <body>
-    <h1>Haz clic en el cuadrado rojo</h1>
+</head>
+
+<body>
+    <h1>Haz clic en el circulo </h1>
     <input type="number" id="timeout" min="1" max="100" value="30" />
     <button id="setGameTimeout">Fijar temporizador</button>
-    <button id="changeTheme">Cambiar tema</button>
-
     <hr />
     <div id="gameArea">
-      <div id="clickTarget"></div>
+        <div id="clickTarget"></div>
     </div>
     <p>Puntuación: <span id="score">0</span></p>
     <p id="timer">Tiempo restante: <span id="timeLeft">30</span></p>
     <button id="startGame">Iniciar temporizador</button>
-    <hr />
-
     <p id="mensaje"></p>
     <script src="script.js"></script>
-  </body>
+</body>
+
 </html>
