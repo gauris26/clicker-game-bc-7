@@ -9,10 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const startGame = document.querySelector("#startGame");
   const scoreDisplay = document.querySelector("#score");
   const gameArea = document.querySelector("#gameArea");
+  const fallasDisplay = document.querySelector("#clicfallas");
 
   let refreshIntervalId = null;
   let score = 0;
   let timeLeft = 30;
+  let conteoclic = 0;
 
   function setGameValueTimeout() {
     let timeout = timeoutInput.value;
@@ -28,6 +30,13 @@ document.addEventListener("DOMContentLoaded", function () {
     setGameTimeout.disabled = true;
     startGame.disabled = true;
     mensajeDisplay.textContent = "";
+
+    let gov = document.getElementById("gameoverimg");
+    if (gov) { 
+      gov.remove();
+    }
+
+    clickTarget.style.display = "";
 
     // Temporizador principal
     refreshIntervalId = setInterval(() => {
@@ -96,12 +105,27 @@ document.addEventListener("DOMContentLoaded", function () {
       timeoutInput.disabled = false;
       startGame.disabled = false;
 
-      let mensaje = `Tiempo agotado! Tu puntuación final es: ${score}`;
-      alert(mensaje);
+      if (conteoclic - score > score) {
+        let gov = document.createElement("img");
+        gov.id = "gameoverimg";
+        gov.style.width = "100%";
+        gov.style.height = "100%";
+        gov.src =
+          "https://png.pngtree.com/png-clipart/20210311/original/pngtree-sad-game-over-neon-png-image_5997417.jpg";
+        gameArea.appendChild(gov);
+        clickTarget.style.display = "none";
+      }
+
+      let mensaje = `Tiempo agotado! Tu puntuación final es: ${score} ${
+        "\n Tus fallas fueron: " + (conteoclic - score)
+      }`;
+      //alert(mensaje);
       score = 0;
+      conteoclic = 0;
 
       mensajeDisplay.textContent = mensaje;
       scoreDisplay.textContent = score;
+      fallasDisplay.textContent = conteoclic;
     }
   }
 
@@ -115,4 +139,11 @@ document.addEventListener("DOMContentLoaded", function () {
     clickTarget.style.left = `${randomX}px`;
     clickTarget.style.top = `${randomY}px`;
   }
+
+  gameArea.addEventListener("click", function () {
+    if (refreshIntervalId != null) {
+      conteoclic++;
+      fallasDisplay.textContent = conteoclic - score;
+    }
+  });
 });
